@@ -5,6 +5,6 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"status":"online"}
+    return {"status": "online"}
 
 app.include_router(messages_router)
