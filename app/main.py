@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.schemas import Message
+from app.routers.messages import router as messages_router
 
 app = FastAPI()
 
@@ -7,8 +7,4 @@ app = FastAPI()
 def root():
     return {"status":"online"}
 
-
-@app.post("/message")
-def create_message(message: Message):
-    return {"received_message": message.text
-    }
+app.include_router(messages_router)
