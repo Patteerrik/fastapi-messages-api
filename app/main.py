@@ -3,6 +3,8 @@ from app.routers.messages import router as messages_router
 from app.database import engine
 from app.models import Message
 from app.database import Base
+from fastapi import Depends
+from app.core.security import require_api_key
 
 
 app = FastAPI()
@@ -11,6 +13,10 @@ app = FastAPI()
 @app.get("/")
 def root():
     return {"status": "online"}
+
+@app.get("/protected")
+def protected(_: str = Depends(require_api_key)):
+    return {"status": "ok"}
 
 Base.metadata.create_all(bind=engine)
 
