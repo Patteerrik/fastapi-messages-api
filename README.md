@@ -32,6 +32,7 @@ Request:
 {
   "text": "Hello world"
 }
+``` 
 
 ---
 
@@ -39,4 +40,5 @@ Request:
 
 ```bash
 docker compose up --build
+```
 
