@@ -29,11 +29,14 @@ The API was built incrementally to show how the implementation can evolve
 
 Request:
 ```json
-{ "text": "Hello world" }
+{
+  "text": "Hello world"
+}
 
+---
 
-## Run with Docker
+## Run with Docker Compose
 
 ```bash
-docker build -t momentum-app .
-docker run -p 8000:8000 momentum-app
+docker compose up --build
+
