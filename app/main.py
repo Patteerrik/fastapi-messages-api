@@ -23,6 +23,5 @@ def root():
 def protected(_: str = Depends(require_api_key)):
     return {"status": "ok"}
 
-Base.metadata.create_all(bind=engine)
 
 app.include_router(messages_router)
