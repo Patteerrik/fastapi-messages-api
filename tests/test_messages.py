@@ -16,3 +16,16 @@ def test_protected_with_key_returns_200():
     )
     assert res.status_code == 200
     assert res.json() == {"status": "ok"}
+
+
+def test_create_message_persists(client) -> None:
+    payload = {"text": "Hello test"}
+
+    resp = client.post("/messages", json=payload)
+    assert resp.status_code in (200, 201)
+
+    data = resp.json()
+    assert data["text"] == "Hello test"
+
+    if "id" in data:
+        assert isinstance(data["id"], int)
