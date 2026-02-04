@@ -1,44 +1,83 @@
 # FastAPI Messages API
 
-A small, focused backend API built with **FastAPI** and **SQLAlchemy**.
-The project demonstrates clean API design, separation of concerns, and
-persistent storage using SQLite.
-
-The API was built incrementally to show how the implementation can evolve
-(from in-memory storage to a real database) **without changing the API contract**.
+Production-ready backend API built with FastAPI, PostgreSQL, and Docker.
+Demonstrates clean architecture, database migrations, automated testing,
+and continuous integration.
 
 ---
 
-## Features
+## Tech Stack
 
-- REST API with FastAPI
-- Clear separation of concerns:
-  - Pydantic schemas (API contracts)
-  - SQLAlchemy models (database layer)
-  - Feature-based routers
-- SQLite persistence
-- Request & response validation
-- Interactive Swagger documentation
-
----
-
-## API Endpoints
-
-### Create a message
-**POST `/messages`**
-
-Request:
-```json
-{
-  "text": "Hello world"
-}
-``` 
+- FastAPI
+- SQLAlchemy 2.0
+- PostgreSQL
+- Alembic
+- Docker & Docker Compose
+- Pytest
+- GitHub Actions
 
 ---
 
-## Run with Docker Compose
+## Architecture
 
-```bash
-docker compose up --build
+```text
+app/
+├─ main.py
+├─ core/
+│  ├─ config.py
+│  └─ security.py
+├─ routers/
+│  └─ messages.py
+├─ database.py
+├─ deps.py
+├─ models.py
+alembic/
+tests/
 ```
 
+---
+
+## Features 
+
+- API key protected endpoints
+- Persistent PostgreSQL storage
+- Database migrations with Alembic
+- Dependency-injected DB sessions
+- Automated tests with pytest
+- CI pipeline running tests on push
+
+---
+
+## Run locally
+
+- docker compose up --build
+- API: http://localhost:8000
+- Docs: http://localhost:8000/docs
+
+---
+
+## Run tests 
+
+- docker compose exec api pytest
+
+---
+
+## CI
+
+GitHub Actions runs the test suite on every push.
+
+---
+
+## Why this project
+
+Built to demonstrate how a simple FastAPI service can be evolved into a
+maintainable, production-ready backend using industry-standard tools
+(PostgreSQL, Alembic, Docker, CI) while keeping a stable API contract.
+
+---
+
+## Local development vs CI
+
+- Local development uses Docker Compose with PostgreSQL
+- CI runs tests in an isolated container environment
+- Environment variables are managed via .env locally and GitHub Secrets in CI
