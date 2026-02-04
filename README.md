@@ -1,6 +1,8 @@
 # FastAPI Messages API
 
-Production-ready backend API built with FastAPI, PostgreSQL, and Docker.
+![CI](https://github.com/Patteerrik/fastapi-messages-api/actions/workflows/ci.yml/badge.svg)
+
+Production-ready backend API built with **FastAPI**, **PostgreSQL**, and **Docker**.  
 Demonstrates clean architecture, database migrations, automated testing,
 and continuous integration.
 
@@ -48,31 +50,50 @@ tests/
 
 ---
 
-## Run locally
+## Quick demo
 
-- docker compose up --build
+Start the application:
+
+```bash
+docker compose up --build
+```
+
+# Create a message (unauthenticated endpoint):
+
+```bash
+curl -X POST http://localhost:8000/messages \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Hello world"}'
+```
+
+# Call a protected endpoint (API key required):
+```bash
+curl http://localhost:8000/protected \
+  -H "X-API-Key: dev-secret"
+```
+
+---
+
+## Run locally
+```bash
+docker compose up --build
+```
 - API: http://localhost:8000
 - Docs: http://localhost:8000/docs
 
 ---
 
 ## Run tests 
-
-- docker compose exec api pytest
+```bash
+docker compose exec api pytest
+````
 
 ---
 
 ## CI
 
-GitHub Actions runs the test suite on every push.
-
----
-
-## Why this project
-
-Built to demonstrate how a simple FastAPI service can be evolved into a
-maintainable, production-ready backend using industry-standard tools
-(PostgreSQL, Alembic, Docker, CI) while keeping a stable API contract.
+GitHub Actions automatically builds containers and runs the full test
+suite on every push and pull request.
 
 ---
 
@@ -81,3 +102,11 @@ maintainable, production-ready backend using industry-standard tools
 - Local development uses Docker Compose with PostgreSQL
 - CI runs tests in an isolated container environment
 - Environment variables are managed via .env locally and GitHub Secrets in CI
+
+---
+
+## Why this project
+
+Built to demonstrate how a simple FastAPI service can be evolved into a
+maintainable, production-ready backend using industry-standard tools
+(PostgreSQL, Alembic, Docker, CI) while keeping a stable API contract.
